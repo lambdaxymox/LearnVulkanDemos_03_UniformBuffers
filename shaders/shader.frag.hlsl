@@ -4,11 +4,11 @@ struct PS_Input {
 };
 
 struct PS_Output {
-    float4 outColor : COLOR0;
+    float4 outColor : SV_TARGET0;
 };
 
 
-PS_Output main(PS_Input input) : SV_TARGET {    
+PS_Output main(PS_Input input) {    
     float4 outFragColor = float4(input.fragColor, 1.0);
     
     PS_Output output;

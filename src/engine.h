@@ -5,21 +5,13 @@
 
 #include <iostream>
 #include <stdexcept>
-#include <cstdlib>
 #include <vector>
 #include <optional>
 #include <set>
-#include <cstdint>
-#include <limits>
-#include <algorithm>
-#include <fstream>
-#include <chrono>
-#include <random>
+#include <unordered_set>
 
 #include <fmt/core.h>
 #include <fmt/ostream.h>
-
-#include <unordered_set>
 
 #ifndef GLFW_INCLUDE_VULKAN
 #define GLFW_INCLUDE_VULKAN
@@ -33,9 +25,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/hash.hpp>
-
-#include <stb/stb_image.h>
-#include <tiny_obj_loader/tiny_obj_loader.h>
 
 
 #ifdef NDEBUG
@@ -51,12 +40,13 @@ namespace VulkanEngine {
 
 namespace Constants {
 
-    const std::string VK_LAYER_KHRONOS_validation = std::string { "VK_LAYER_KHRONOS_validation" };
-    const std::string VK_KHR_portability_subset = std::string { "VK_KHR_portability_subset" };
-    const std::vector<std::string> VALIDATION_LAYERS = std::vector<std::string> { 
-        VK_LAYER_KHRONOS_validation
-    };
-} // namespace Contants
+const std::string VK_LAYER_KHRONOS_validation = std::string { "VK_LAYER_KHRONOS_validation" };
+const std::string VK_KHR_portability_subset = std::string { "VK_KHR_portability_subset" };
+const std::vector<std::string> VALIDATION_LAYERS = std::vector<std::string> { 
+    VK_LAYER_KHRONOS_validation
+};
+
+}
 
 class VulkanInstanceProperties final {
     public:

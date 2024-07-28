@@ -18,10 +18,7 @@
 
 #include <fmt/core.h>
 #include <fmt/ostream.h>
-/*
-#include <vulkan_engine/vulkan_platform.h>
-#include <vulkan_engine/vulkan_platform_impl_fmt.h>
-*/
+
 #include <unordered_set>
 
 #ifndef GLFW_INCLUDE_VULKAN

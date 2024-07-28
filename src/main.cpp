@@ -2437,9 +2437,8 @@ class App {
 
             // NOTE: The order of `clearValues` should be identical to the order of the attachments
             // in the render pass.
-            const auto clearValues = std::array<VkClearValue, 2> {
+            const auto clearValues = std::array<VkClearValue, 1> {
                 VkClearValue { .color = VkClearColorValue { { 0.0f, 0.0f, 0.0f, 1.0f } } },
-                VkClearValue { .depthStencil = VkClearDepthStencilValue { 1.0f, 0 } },
             };
 
             const auto renderPassInfo = VkRenderPassBeginInfo {

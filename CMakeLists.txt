@@ -79,20 +79,25 @@ find_package(Vulkan REQUIRED)
 add_subdirectory(external/glfw-3.4)
 add_subdirectory(external/glm-1.0.1)
 add_subdirectory(external/fmt-10.2.0)
+add_subdirectory(external/stb)
+add_subdirectory(external/tiny_obj_loader)
 
-add_subdirectory(internal/vulkan_engine)
+# add_subdirectory(internal/vulkan_engine)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
 
 add_executable(LearnVulkanDemos_03_UniformBuffers)
 target_sources(LearnVulkanDemos_03_UniformBuffers PRIVATE
     src/main.cpp
+    src/engine.cpp
 )
 target_link_libraries(LearnVulkanDemos_03_UniformBuffers PRIVATE Vulkan::Vulkan)
-target_link_libraries(LearnVulkanDemos_03_UniformBuffers PRIVATE vulkan_engine)
+# target_link_libraries(LearnVulkanDemos_03_UniformBuffers PRIVATE vulkan_engine)
 target_link_libraries(LearnVulkanDemos_03_UniformBuffers PRIVATE glfw)
 target_link_libraries(LearnVulkanDemos_03_UniformBuffers PRIVATE glm)
 target_link_libraries(LearnVulkanDemos_03_UniformBuffers PRIVATE fmt)
+target_link_libraries(LearnVulkanDemos_03_UniformBuffers PRIVATE stb)
+target_link_libraries(LearnVulkanDemos_03_UniformBuffers PRIVATE tiny_obj_loader)
 add_dependencies(LearnVulkanDemos_03_UniformBuffers GLSL_Shaders)
 add_dependencies(LearnVulkanDemos_03_UniformBuffers HLSL_Shaders)
 

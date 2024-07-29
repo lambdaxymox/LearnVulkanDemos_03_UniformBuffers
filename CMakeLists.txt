@@ -86,6 +86,7 @@ add_executable(LearnVulkanDemos_03_UniformBuffers)
 target_sources(LearnVulkanDemos_03_UniformBuffers PRIVATE
     src/main.cpp
     src/engine.cpp
+    src/engine_impl_fmt.cpp
 )
 target_link_libraries(LearnVulkanDemos_03_UniformBuffers PRIVATE Vulkan::Vulkan)
 target_link_libraries(LearnVulkanDemos_03_UniformBuffers PRIVATE glfw)

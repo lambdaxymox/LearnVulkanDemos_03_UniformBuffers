@@ -111,3 +111,10 @@ add_custom_target(
     HLSL_Shaders
     DEPENDS ${HLSL_SPIRV_BINARY_FILES}
 )
+
+add_custom_target(run
+    COMMAND ${CMAKE_COMMAND} -E env $<TARGET_FILE:LearnVulkanDemos_03_UniformBuffers>
+    DEPENDS "LearnVulkanDemos_03_UniformBuffers"
+    WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+    VERBATIM
+)

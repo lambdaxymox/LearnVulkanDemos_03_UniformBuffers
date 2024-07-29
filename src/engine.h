@@ -223,7 +223,7 @@ class SystemFactory final {
 
         VkInstance create(const VulkanInstanceSpec& instanceSpec);
     private:
-        PlatformInfoProvider* m_infoProvider;
+        std::unique_ptr<PlatformInfoProvider> m_infoProvider;
 
         static std::vector<const char*> convertToCStrings(const std::vector<std::string>& strings);
 };
@@ -276,7 +276,7 @@ class PhysicalDeviceSpecProvider final {
 
 class PhysicalDeviceSelector final {
     public:
-        explicit PhysicalDeviceSelector(VkInstance instance, PlatformInfoProvider* infoProvider);
+        explicit PhysicalDeviceSelector(VkInstance instance, std::unique_ptr<PlatformInfoProvider> infoProvider);
 
         ~PhysicalDeviceSelector();
 
@@ -295,7 +295,7 @@ class PhysicalDeviceSelector final {
         VkPhysicalDevice selectPhysicalDeviceForSurface(VkSurfaceKHR surface, const PhysicalDeviceSpec& physicalDeviceSpec) const;
     private:
         VkInstance m_instance;
-        PlatformInfoProvider* m_infoProvider;
+        std::unique_ptr<PlatformInfoProvider> m_infoProvider;
 };
 
 class LogicalDeviceSpec final {
@@ -349,7 +349,7 @@ class LogicalDeviceSpecProvider final {
 
 class LogicalDeviceFactory final {
     public:
-        explicit LogicalDeviceFactory(VkPhysicalDevice physicalDevice, VkSurfaceKHR surface, PlatformInfoProvider* infoProvider);
+        explicit LogicalDeviceFactory(VkPhysicalDevice physicalDevice, VkSurfaceKHR surface, std::unique_ptr<PlatformInfoProvider> infoProvider);
 
         ~LogicalDeviceFactory();
 
@@ -361,7 +361,7 @@ class LogicalDeviceFactory final {
     private:
         VkPhysicalDevice m_physicalDevice;
         VkSurfaceKHR m_surface;
-        PlatformInfoProvider* m_infoProvider;
+        std::unique_ptr<PlatformInfoProvider> m_infoProvider;
 
         static std::vector<const char*> convertToCStrings(const std::vector<std::string>& strings);
 };
@@ -372,7 +372,7 @@ class VulkanDebugMessenger final {
 
         ~VulkanDebugMessenger();
 
-        static VulkanDebugMessenger* create(VkInstance instance);
+        static std::unique_ptr<VulkanDebugMessenger> create(VkInstance instance);
 
         static VkResult CreateDebugUtilsMessengerEXT(
             VkInstance instance, 
@@ -422,7 +422,7 @@ class WindowSystem final {
         
         ~WindowSystem();
 
-        static WindowSystem* create(VkInstance instance);
+        static std::unique_ptr<WindowSystem> create(VkInstance instance);
 
         void createWindow(uint32_t width, uint32_t height, const std::string& title);
 
@@ -511,10 +511,9 @@ class GpuDeviceInitializer final {
 
         ~GpuDeviceInitializer();
 
-        GpuDevice* createGpuDevice();
+        std::unique_ptr<GpuDevice> createGpuDevice();
     private:
         VkInstance m_instance;
-        PlatformInfoProvider* m_infoProvider;
         VkSurfaceKHR m_dummySurface;
         VkPhysicalDevice m_physicalDevice;
         VkDevice m_device;
@@ -597,14 +596,14 @@ class Engine final {
 
         VkShaderModule createShaderModule(std::vector<char>& code);
     private:
-        PlatformInfoProvider* m_infoProvider;
-        SystemFactory* m_systemFactory;
+        std::unique_ptr<PlatformInfoProvider> m_infoProvider;
+        std::unique_ptr<SystemFactory> m_systemFactory;
         VkInstance m_instance;
-        VulkanDebugMessenger* m_debugMessenger;
-        WindowSystem* m_windowSystem;
+        std::unique_ptr<VulkanDebugMessenger> m_debugMessenger;
+        std::unique_ptr<WindowSystem> m_windowSystem;
         VkSurfaceKHR m_surface;
 
-        GpuDevice* m_gpuDevice;
+        std::unique_ptr<GpuDevice> m_gpuDevice;
 
         bool m_enableValidationLayers; 
         bool m_enableDebuggingExtensions;

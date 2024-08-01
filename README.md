@@ -5,13 +5,6 @@
 ## Introduction
 This repository is a tech demo for loading uniform buffers in Vulkan.
 
-## Features
-The demo has some extra features of interest. 
-* A custom set of **cmake** modules for compiling and building HLSL and GLSL 
-  shaders at build time.
-* All shaders have both HLSL and GLSL versions.
-
-
 ## Getting Started
 In order to compile and run this demo, your system needs to have a Vulkan
 SDK installed on the system. In particular, on macOS, you need something

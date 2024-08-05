@@ -22,7 +22,7 @@ instructions to build the demo to make things simpler to get moving with.
 To compile the demo, run
 
 ```bash
-cmake -B build
+cmake -S . -B build
 cmake --build build
 ```
 

@@ -483,6 +483,8 @@ class GpuDevice final {
         VkShaderModule createShaderModule(std::istream& stream);
 
         VkShaderModule createShaderModule(const std::vector<char>& code);
+
+        VkShaderModule createShaderModule(const std::vector<unsigned char>& code);
     private:
         VkInstance m_instance;
         VkPhysicalDevice m_physicalDevice;
@@ -594,7 +596,9 @@ class Engine final {
 
         VkShaderModule createShaderModule(std::istream& stream);
 
-        VkShaderModule createShaderModule(std::vector<char>& code);
+        VkShaderModule createShaderModule(const std::vector<char>& code);
+
+        VkShaderModule createShaderModule(const std::vector<unsigned char>& code);
     private:
         std::unique_ptr<PlatformInfoProvider> m_infoProvider;
         std::unique_ptr<SystemFactory> m_systemFactory;

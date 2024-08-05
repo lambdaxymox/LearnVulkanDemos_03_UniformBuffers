@@ -1176,6 +1176,26 @@ VkShaderModule GpuDevice::createShaderModule(const std::vector<char>& code) {
     return shaderModule;
 }
 
+VkShaderModule GpuDevice::createShaderModule(const std::vector<unsigned char>& code) {
+    const auto createInfo = VkShaderModuleCreateInfo {
+        .sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO,
+        .codeSize = code.size(),
+        .pCode = reinterpret_cast<const uint32_t*>(code.data()),
+        .pNext = nullptr,
+        .flags = 0,
+    };
+
+    auto shaderModule = VkShaderModule {};
+    const auto result = vkCreateShaderModule(m_device, &createInfo, nullptr, &shaderModule);
+    if (result != VK_SUCCESS) {
+        throw std::runtime_error("failed to create shader module!");
+    }
+
+    m_shaderModules.insert(shaderModule);
+
+    return shaderModule;
+}
+
 std::vector<char> GpuDevice::loadShader(std::istream& stream) {
     const size_t shaderSize = static_cast<size_t>(stream.tellg());
     auto buffer = std::vector<char>(shaderSize);
@@ -1555,7 +1575,11 @@ VkShaderModule Engine::createShaderModule(std::istream& stream) {
     return m_gpuDevice->createShaderModule(stream);
 }
 
-VkShaderModule Engine::createShaderModule(std::vector<char>& code) {
+VkShaderModule Engine::createShaderModule(const std::vector<char>& code) {
+    return m_gpuDevice->createShaderModule(code);
+}
+
+VkShaderModule Engine::createShaderModule(const std::vector<unsigned char>& code) {
     return m_gpuDevice->createShaderModule(code);
 }
 

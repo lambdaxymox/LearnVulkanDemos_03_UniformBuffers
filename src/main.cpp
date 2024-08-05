@@ -737,10 +737,6 @@ class App final {
         }
 
         void createGraphicsPipeline() {
-            /*
-            const auto vertexShaderModule = m_engine->createShaderModuleFromFile("shaders/shader.vert.hlsl.spv");
-            const auto fragmentShaderModule = m_engine->createShaderModuleFromFile("shaders/shader.frag.hlsl.spv");
-            */
             const auto vertexShaderModule = m_engine->createShaderModule(m_hlslShaders.at("shader.vert.hlsl"));
             const auto fragmentShaderModule = m_engine->createShaderModule(m_hlslShaders.at("shader.frag.hlsl"));
 
